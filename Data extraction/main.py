@@ -6,7 +6,9 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import re, os, time
 import pandas as pd
-
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv("BASE_URL")
 # Set Chrome options
 
 
@@ -19,7 +21,7 @@ def scrap(count):
             options = Options()
             options.add_argument("--disable-gpu")
             driver = webdriver.Chrome(options=options)
-            driver.get(f"https://www.propertyfinder.ae/en/rent/properties-for-rent.html?page={page}")
+            driver.get(f"{api_key}?page={page}")
             wait = WebDriverWait(driver, 10)
             elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "property-card-module_property-card__wrapper__ZZTal")))  # Replace "property-card" with your class name
             all_outer_html = ""
