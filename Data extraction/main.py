@@ -6,10 +6,14 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import re, os, time
 import pandas as pd
+
+
+
+# Load environment variables
 from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("BASE_URL")
-# Set Chrome options
+
 
 
 
@@ -18,6 +22,7 @@ def scrap(count):
     page = 1
     while page <= count:
         try:
+            # Set Chrome options
             options = Options()
             options.add_argument("--disable-gpu")
             driver = webdriver.Chrome(options=options)
@@ -84,7 +89,7 @@ def scrap(count):
 
 
 if __name__ == "__main__":
-    scrap(2)
+    scrap(1)
     colmuns = ["Id", "Link", "Status", "Type", "Bedroom", "Bathroom", "Space", "Rent Amount", "Currency", "Timespan", "Neighborhood", "City"]
     df = pd.DataFrame(data, columns=colmuns)
     print(df)
